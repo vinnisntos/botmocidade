@@ -18,7 +18,15 @@ const client = new Client({
 client.on("qr", (qr) => {
     console.log("Escaneie este QR Code no WhatsApp:");
     qrcode.generate(qr, { small: true });
+
+    // Salvar QR Code como imagem
+    const QRCode = require("qrcode");
+    QRCode.toFile("qrcode.png", qr, { scale: 8 }, (err) => {
+        if (err) console.error(err);
+        else console.log("QR Code salvo como qrcode.png, abra no celular para escanear!");
+    });
 });
+
 
 client.on("ready", () => {
     console.log("🤖 Bot pronto!");
