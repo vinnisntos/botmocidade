@@ -1,0 +1,10 @@
+# Node
+node_modules/
+.env
+
+# Dados do bot
+data/eventos.json
+
+# Sistema
+.DS_Store
+Thumbs.db
