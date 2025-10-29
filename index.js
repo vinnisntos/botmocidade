@@ -15,17 +15,23 @@ const client = new Client({
 });
 
 
+const fs = require("fs");
+const QRCode = require("qrcode");
+const qrcodeTerminal = require("qrcode-terminal");
+
 client.on("qr", (qr) => {
     console.log("Escaneie este QR Code no WhatsApp:");
-    qrcode.generate(qr, { small: true });
 
-    // Salvar QR Code como imagem
-    const QRCode = require("qrcode");
+    // Mostra QR Code no terminal
+    qrcodeTerminal.generate(qr, { small: true });
+
+    // Salva QR Code como PNG
     QRCode.toFile("qrcode.png", qr, { scale: 8 }, (err) => {
-        if (err) console.error(err);
-        else console.log("QR Code salvo como qrcode.png, abra no celular para escanear!");
+        if (err) console.error("Erro ao gerar QR Code:", err);
+        else console.log("QR Code salvo como qrcode.png!");
     });
 });
+
 
 
 client.on("ready", () => {
