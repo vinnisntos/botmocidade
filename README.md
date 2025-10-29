@@ -27,3 +27,50 @@ Ele se conecta ao WhatsApp Web através de um QR Code e pode ser usado em **grup
    ```bash
    git clone https://github.com/vinnisntos/MEU-BOT.git
    cd MEU-BOT
+
+
+
+2. Instale as dependências:
+
+npm install
+
+
+3. Execute o bot:
+
+node index.js
+
+
+4. Escaneie o QR Code com o número de WhatsApp que será o bot.
+
+
+
+💬 Comandos Padrão
+
+
+Comando	Resposta
+!ping	🏓 Pong!
+!oi	👋 Oi! Tudo bem?
+
+
+
+🧩 Exemplo de Código
+client.on('message', async (msg) => {
+  if (msg.body.toLowerCase() === '!ping') {
+    await msg.reply('🏓 Pong!');
+  }
+
+  if (msg.body.toLowerCase() === '!oi') {
+    await msg.reply('Oi! Tudo bem? 👋');
+  }
+});
+
+
+
+👨‍💻 Autor
+
+Desenvolvido por Vinnícius Gabriel Matos Dos Santos
+📍 Projeto aberto para aprendizado e aprimoramento.
+💡 Sinta-se à vontade para contribuir!
+Desenvolvido por Vinnícius Gabriel Matos Dos Santos
+📍 Projeto aberto para aprendizado e aprimoramento.
+💡 Sinta-se à vontade para contribuir!
