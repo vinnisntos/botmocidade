@@ -15,19 +15,20 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
     }
 });
 
 let lastQr = null;
 
+// Evento QR
 client.on("qr", (qr) => {
     console.log("Escaneie este QR Code no WhatsApp:");
     qrcode.generate(qr, { small: true });
     lastQr = qr; // guarda o QR mais recente
 });
 
-// Serve QR dinamicamente
+// Servir QR dinamicamente
 app.get("/qrcode.png", async (req, res) => {
     if (!lastQr) return res.status(404).send("QR Code ainda não gerado");
     try {
@@ -39,12 +40,15 @@ app.get("/qrcode.png", async (req, res) => {
     }
 });
 
+// Inicia servidor Express
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
 
+// Bot pronto
 client.on("ready", () => {
     console.log("🤖 Bot pronto!");
 });
 
+// Boas-vindas e despedida em grupo
 client.on("group_participants_update", async (event) => {
     if (event.action === "add") {
         boasVindas(event, client);
@@ -53,6 +57,7 @@ client.on("group_participants_update", async (event) => {
     }
 });
 
+// Comandos de mensagens
 client.on("message", (msg) => {
     const texto = msg.body.toLowerCase().trim();
     if (texto.startsWith("/cadastro")) {
