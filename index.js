@@ -5,7 +5,12 @@ const { listarEventos } = require("./commands/listarEventos");
 const { boasVindas } = require("./commands/boasVindas");
 const { despedida } = require("./commands/saida");
 
- 
+const express = require("express");
+const QRCode = require("qrcode");
+
+const app = express();
+const port = process.env.PORT || 3000;
+
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
@@ -14,36 +19,32 @@ const client = new Client({
     }
 });
 
-
-const fs = require("fs");
-const QRCode = require("qrcode");
-const qrcodeTerminal = require("qrcode-terminal");
+let lastQr = null;
 
 client.on("qr", (qr) => {
     console.log("Escaneie este QR Code no WhatsApp:");
-
-    // Mostra QR Code no terminal
-    qrcodeTerminal.generate(qr, { small: true });
-
-    // Salva QR Code como PNG
-    QRCode.toFile("qrcode.png", qr, { scale: 8 }, (err) => {
-        if (err) console.error("Erro ao gerar QR Code:", err);
-        else console.log("QR Code salvo como qrcode.png!");
-    });
+    qrcode.generate(qr, { small: true });
+    lastQr = qr; // guarda o QR mais recente
 });
 
+// Serve QR dinamicamente
+app.get("/qrcode.png", async (req, res) => {
+    if (!lastQr) return res.status(404).send("QR Code ainda não gerado");
+    try {
+        const img = await QRCode.toBuffer(lastQr, { type: "png", scale: 8 });
+        res.type("png");
+        res.send(img);
+    } catch (err) {
+        res.status(500).send("Erro ao gerar QR Code");
+    }
+});
 
+app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
 
 client.on("ready", () => {
     console.log("🤖 Bot pronto!");
 });
 
-// depois de client.on("ready")
-client.on("group_participants_update", async (event) => {
-    boasVindas(event, client);
-});
-
-// Listener de grupo
 client.on("group_participants_update", async (event) => {
     if (event.action === "add") {
         boasVindas(event, client);
@@ -54,8 +55,6 @@ client.on("group_participants_update", async (event) => {
 
 client.on("message", (msg) => {
     const texto = msg.body.toLowerCase().trim();
-
-    // Comandos privados
     if (texto.startsWith("/cadastro")) {
         cadastrarEvento(msg, client);
     } else if (texto.startsWith("/eventos")) {
