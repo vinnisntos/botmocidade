@@ -5,6 +5,7 @@ const eventosPath = path.join(__dirname, "../data/eventos.json");
 function listarEventos(msg, client) {
   const eventos = lerEventos();
 
+  
   const hoje = new Date();
   const ativos = eventos.filter(e => new Date(e.data) >= hoje);
 

@@ -13,6 +13,7 @@ fs.readdirSync('./commands').forEach(file => {
     }
 });
 
+
 client.on('qr', qr => qrcode.generate(qr, { small: true }));
 client.on('ready', () => console.log("🤖 Bot pronto!"));
 

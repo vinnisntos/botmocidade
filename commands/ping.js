@@ -4,3 +4,4 @@ module.exports = {
         msg.reply("🏓 Pong!");
     }
 };
+
