@@ -1,5 +1,5 @@
 // commands/boasVindas.js
-async function boasVindas(event, client) {
+async function boasVindas(event, client) { 
     const chat = await client.getChatById(event.id._serialized);
 
     // Checa se a ação foi adicionar participante

@@ -11,7 +11,7 @@ const congregacoes = [
 const horarios = { MANHÃ: "10:00", TARDE: ["14:00", "14:30"], NOITE: { DOMINGO: "18:30", OUTROS: "19:30" } };
 
 async function cadastrarEvento(msg, client) {
-    const chatId = msg.from;
+    const chatId = msg.from; 
 
     await client.sendMessage(chatId, "Selecione o tipo de evento:\n1️⃣ BTM\n2️⃣ CPJ\n3️⃣ RDM\n4️⃣ RDJ\n5️⃣ COF");
     const tipo = await esperarResposta(chatId, client);

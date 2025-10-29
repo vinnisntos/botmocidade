@@ -7,7 +7,7 @@ async function despedida(event, client) {
                 `😢 Sentiremos sua falta! Esperamos te ver em breve nos próximos eventos do grupo. -CCB-015 BOT`
             );
         }
-    }
+    } 
 }
 
 module.exports = { despedida };

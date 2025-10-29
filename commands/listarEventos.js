@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const eventosPath = path.join(__dirname, "../data/eventos.json");
-
+ 
 function listarEventos(msg, client){
     const eventos = lerEventos();
     const hoje = new Date();

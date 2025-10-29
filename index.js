@@ -5,7 +5,7 @@ const { listarEventos } = require("./commands/listarEventos");
 const { boasVindas } = require("./commands/boasVindas");
 const { despedida } = require("./commands/saida");
 
-
+ 
 const client = new Client({
     authStrategy: new LocalAuth()
 });
