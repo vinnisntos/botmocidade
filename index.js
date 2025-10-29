@@ -1,6 +1,6 @@
 const qrcode = require("qrcode-terminal");
 const { Client, LocalAuth } = require("whatsapp-web.js");
-const { cadastrarEvento } = require("./commands/cadastroEvento");
+const { cadastrarEvento } = require("./commands/cadastroEventos");
 const { listarEventos } = require("./commands/listarEventos");
 const { boasVindas } = require("./commands/boasVindas");
 const { despedida } = require("./commands/saida");
