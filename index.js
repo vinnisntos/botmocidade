@@ -48,13 +48,9 @@ client.on("ready", () => {
     console.log("🤖 Bot pronto!");
 });
 
-// Boas-vindas e despedida em grupo
-client.on("group_participants_update", async (event) => {
-    if (event.action === "add") {
-        boasVindas(event, client);
-    } else if (event.action === "remove") {
-        despedida(event, client);
-    }
+// kboas vindas
+client.on("group_join", async (event) => {
+    await boasVindas(event, client);
 });
 
 // Comandos de mensagens

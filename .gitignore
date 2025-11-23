@@ -3,3 +3,4 @@ node_modules/
 data/eventos.json
 .DS_Store
 Thumbs.db
+.wwebjs_auth
